@@ -13,6 +13,7 @@ namespace BroadcastPlugin
         {
             if (!_pluginInstance.Config.IsEnabled) return;
             Map.Broadcast(10,"<color=green>라운드가 시작되었습니다.</color>");
+            Log.Info("이 서버는 ombe1229의 브로드캐스트 플러그인을 사용 중입니다.");
             BroadcastPlugin.IsStarted = true;
         }
 

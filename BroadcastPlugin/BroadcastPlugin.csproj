@@ -32,29 +32,20 @@
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
     <ItemGroup>
-        <Reference Include="0Harmony, Version=2.0.3.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\..\..\Desktop\Files\EXILED\0Harmony.dll</HintPath>
-        </Reference>
         <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
           <HintPath>..\..\..\Desktop\Files\EXILED\Assembly-CSharp.dll</HintPath>
         </Reference>
-        <Reference Include="Assembly-CSharp-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\..\..\Desktop\Files\EXILED\Assembly-CSharp-firstpass.dll</HintPath>
-        </Reference>
-        <Reference Include="Exiled.API, Version=2.1.18.0, Culture=neutral, PublicKeyToken=null">
+        <Reference Include="Exiled.API, Version=2.1.21.0, Culture=neutral, PublicKeyToken=null">
           <HintPath>..\..\..\Desktop\Files\EXILED\Exiled.API.dll</HintPath>
         </Reference>
-        <Reference Include="Exiled.Events, Version=2.1.18.0, Culture=neutral, PublicKeyToken=null">
+        <Reference Include="Exiled.Events, Version=2.1.21.0, Culture=neutral, PublicKeyToken=null">
           <HintPath>..\..\..\Desktop\Files\EXILED\Exiled.Events.dll</HintPath>
         </Reference>
-        <Reference Include="Exiled.Loader, Version=2.1.18.0, Culture=neutral, PublicKeyToken=null">
+        <Reference Include="Exiled.Loader, Version=2.1.21.0, Culture=neutral, PublicKeyToken=null">
           <HintPath>..\..\..\Desktop\Files\EXILED\Exiled.Loader.dll</HintPath>
         </Reference>
-        <Reference Include="Exiled.Permissions, Version=2.1.18.0, Culture=neutral, PublicKeyToken=null">
+        <Reference Include="Exiled.Permissions, Version=2.1.21.0, Culture=neutral, PublicKeyToken=null">
           <HintPath>..\..\..\Desktop\Files\EXILED\Exiled.Permissions.dll</HintPath>
-        </Reference>
-        <Reference Include="Mirror, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\..\..\Desktop\Files\EXILED\Mirror.dll</HintPath>
         </Reference>
         <Reference Include="System" />
         <Reference Include="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
