@@ -68,7 +68,7 @@ namespace BroadcastPlugin
         internal void OnRespawningTeam(RespawningTeamEventArgs ev)
         {
             if (ev.NextKnownTeam != SpawnableTeamType.ChaosInsurgency) return;
-            foreach (var player in Player.List)
+            foreach (Player player in Player.List)
             {
                 if (player.Team == Team.CDP || player.Team == Team.CHI) player.Broadcast(10,"<color=army_green>혼돈의 반란</color>이 시설 내에 진입했습니다.");
             }
@@ -86,7 +86,7 @@ namespace BroadcastPlugin
             Player lastplayer = null;
             if (playerTeam == Team.CDP || playerTeam == Team.CHI)
             {
-                foreach (var player in Player.List)
+                foreach (Player player in Player.List)
                 {
                     if (player.Team == Team.CDP || player.Team == Team.CHI && player != ev.Target)
                     {
@@ -97,7 +97,7 @@ namespace BroadcastPlugin
             } 
             else if (playerTeam == Team.MTF || playerTeam == Team.RSC)
             {
-                foreach (var player in Player.List)
+                foreach (Player player in Player.List)
                 {
                     if (player.Team == Team.MTF || player.Team == Team.RSC && player != ev.Target)
                     {
@@ -108,7 +108,7 @@ namespace BroadcastPlugin
             } 
             else if (playerTeam == Team.SCP)
             {
-                foreach (var player in Player.List)
+                foreach (Player player in Player.List)
                 {
                     if (player.Team == Team.SCP && player != ev.Target)
                     {
@@ -155,7 +155,7 @@ namespace BroadcastPlugin
             if (ev.Player.Team != Team.SCP) return;
             string scpList = "";
             int count = 0;
-            foreach (var player in Player.List)
+            foreach (Player player in Player.List)
             {
                 if (player.Team == Team.SCP)
                 {
