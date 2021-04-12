@@ -118,8 +118,9 @@ namespace BroadcastPlugin
                 }
             }
             if (teamLeft == 1)
-                if (lastplayer != null)
-                    lastplayer.Broadcast(10, "당신이 현재 진영의 <color=red>마지막 생존자</color>입니다!");
+            {
+                lastplayer?.Broadcast(10, "당신이 현재 진영의 <color=red>마지막 생존자</color>입니다!");
+            }
         }
 
         internal void OnEnteringFemurBreaker(EnteringFemurBreakerEventArgs ev)
