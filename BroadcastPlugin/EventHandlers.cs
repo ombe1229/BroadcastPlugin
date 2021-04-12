@@ -164,7 +164,7 @@ namespace BroadcastPlugin
                     count++;
                 }
             }
-            ev.Player.Broadcast(10,$"이번 라운드의 <color=red>SCP</color> 목록\n{scpList}");
+            ev.Player.Broadcast(10,$"이번 라운드의 <color=red>SCP</color>는 <color=red>{count}</color>마리입니다.\n{scpList}");
         }
     }
 }
