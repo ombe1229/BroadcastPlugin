@@ -84,37 +84,12 @@ namespace BroadcastPlugin
             Team playerTeam = ev.Target.Team;
             int teamLeft = 0;
             Player lastplayer = null;
-            if (playerTeam == Team.CDP || playerTeam == Team.CHI)
+            foreach (Player player in Player.List)
             {
-                foreach (Player player in Player.List)
+                if (!player.IsEnemy(playerTeam) && player != ev.Target)
                 {
-                    if (player.Team == Team.CDP || player.Team == Team.CHI && player != ev.Target)
-                    {
-                        teamLeft++;
-                        lastplayer = player;
-                    }
-                }
-            } 
-            else if (playerTeam == Team.MTF || playerTeam == Team.RSC)
-            {
-                foreach (Player player in Player.List)
-                {
-                    if (player.Team == Team.MTF || player.Team == Team.RSC && player != ev.Target)
-                    {
-                        teamLeft++;
-                        lastplayer = player;
-                    }
-                }
-            } 
-            else if (playerTeam == Team.SCP)
-            {
-                foreach (Player player in Player.List)
-                {
-                    if (player.Team == Team.SCP && player != ev.Target)
-                    {
-                        teamLeft++;
-                        lastplayer = player;
-                    }
+                    teamLeft++;
+                    lastplayer = player;
                 }
             }
             if (teamLeft == 1)
