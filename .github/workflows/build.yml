@@ -1,4 +1,4 @@
-name: release new version
+name: build
 
 on:
   push:
@@ -23,3 +23,9 @@ jobs:
 
       - name: Build
         run: dotnet msbuild BroadcastPlugin
+
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: Plugin
+          path: Broadcast/bin/Debug/BroadcastPlugin.dll
