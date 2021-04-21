@@ -13,14 +13,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Setup Nuget
-        uses: NuGet/setup-nuget@v1
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1.7.2
+        with:
+          dotnet-version: 3.1.x
 
-      - name: Restore Packages
-        run: nuget restore BroadcastPlugin.sln
-
-      - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v1
+      - name: Restore
+        run: dotnet restore
 
       - name: Build
-        run: msbuild BroadcastPlugin.sln -p:Configuration=release
+        run: dotnet msbuild
