@@ -15,7 +15,7 @@ jobs:
       - name: Setup MSBuild
         uses: warrenbuckley/Setup-MSBuild@v1
       - name: Setup Nuget
-        uses: NuGet/setup-nuget@v1.0.2
+        uses: NuGet/setup-nuget@v1
       - name: Restore Packages
         run: nuget restore BroadcastPlugin.sln
       - name: Build
