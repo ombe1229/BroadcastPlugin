@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs_on: ubuntu-lastest
+    runs_on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
