@@ -9,7 +9,12 @@ namespace BroadcastPlugin
 {
     public class BroadcastPlugin : Features.Plugin<Configs>
     {
-        public EventHandlers EventHandlers { get; private set; }
+        public EventHandlers EventHandlers { get; }
+
+        public BroadcastPlugin()
+        {
+            EventHandlers = new EventHandlers(this);
+        }
 
         public void LoadEvents()
         {
@@ -32,10 +37,18 @@ namespace BroadcastPlugin
             if (!Config.IsEnabled) return;
            
             base.OnEnabled();
-            
-            EventHandlers = new EventHandlers(this);
-            LoadEvents();
-            Log.Info("브로드캐스트 플러그인 활성화");
+
+            try
+            {
+                LoadEvents();
+                Log.Info("브로드캐스트 플러그인 활성화");
+            } 
+            catch
+            {
+                // 오류 발생시, Disable 후 다시 throw
+                OnDisabled();
+                throw;
+            }
         }
         
         public override void OnDisabled()
@@ -54,7 +67,6 @@ namespace BroadcastPlugin
             WarheadEvents.Starting -= EventHandlers.OnWarheadStarting;
             WarheadEvents.Stopping -= EventHandlers.OnWarheadStopping;
             PlayerEvents.Spawning -= EventHandlers.OnSpawning;
-            EventHandlers = null;
         }
 
         public override void OnReloaded()

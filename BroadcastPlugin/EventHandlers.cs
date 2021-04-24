@@ -77,19 +77,12 @@ namespace BroadcastPlugin
         internal void OnDied(DiedEventArgs ev)
         {
             Team playerTeam = ev.Target.Team;
-            int teamLeft = 0;
-            Player lastplayer = null;
-            foreach (Player player in Player.List)
+
+            List<Player> enemyPlayers = Player.List.Where(p => p.IsEnemy(playerTeam) && p != ev.Target).ToList();
+
+            if (enemyPlayers.Count == 1)
             {
-                if (!player.IsEnemy(playerTeam) && player != ev.Target)
-                {
-                    teamLeft++;
-                    lastplayer = player;
-                }
-            }
-            if (teamLeft == 1)
-            {
-                lastplayer?.Broadcast(10, "당신이 현재 진영의 <color=red>마지막 생존자</color>입니다!");
+                enemyPlayers.First().Broadcast(10, "당신이 현재 진영의 <color=red>마지막 생존자</color>입니다!");
             }
         }
 
@@ -103,8 +96,8 @@ namespace BroadcastPlugin
             if (Generator079.mainGenerator.forcedOvercharge)
                 return;
             
-            int cur = Generator079.mainGenerator.NetworktotalVoltage + 1;
-            if (cur != 5)
+            int cur = ++Generator079.mainGenerator.NetworktotalVoltage;
+            if (cur < 5)
             {
                 Map.Broadcast(10,$"발전기 <color=red>5</color>개중 <color=red>{cur}</color>개가 작동되었습니다.");
             }
