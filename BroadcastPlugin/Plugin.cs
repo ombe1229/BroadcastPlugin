@@ -5,64 +5,59 @@ using MapEvents = Exiled.Events.Handlers.Map;
 using WarheadEvents = Exiled.Events.Handlers.Warhead;
 using Features = Exiled.API.Features;
 
-namespace BroadcastPlugin
-{
-public class BroadcastPlugin : Features.Plugin<Configs>
-{
-    public EventHandlers EventHandlers {
-        get;
-        private set;
-    }
+namespace BroadcastPlugin {
+public class BroadcastPlugin : Features.Plugin<Configs> {
+  public EventHandlers EventHandlers {
+    get;
+    private set;
+  }
 
-    public void LoadEvents()
-    {
-        ServerEvents.RoundStarted += EventHandlers.OnRoundStarting;
-        ServerEvents.RoundEnded += EventHandlers.OnRoundEnding;
-        MapEvents.AnnouncingDecontamination += EventHandlers.OnAnnouncingDecontamination;
-        MapEvents.Decontaminating += EventHandlers.OnDecontaminating;
-        ServerEvents.RespawningTeam += EventHandlers.OnRespawningTeam;
-        MapEvents.AnnouncingNtfEntrance += EventHandlers.OnAnnouncingNtfEntrance;
-        PlayerEvents.Died += EventHandlers.OnDied;
-        PlayerEvents.EnteringFemurBreaker += EventHandlers.OnEnteringFemurBreaker;
-        MapEvents.GeneratorActivated += EventHandlers.OnGeneratorActivated;
-        WarheadEvents.Starting += EventHandlers.OnWarheadStarting;
-        WarheadEvents.Stopping += EventHandlers.OnWarheadStopping;
-        PlayerEvents.Spawning += EventHandlers.OnSpawning;
-    }
+  public void LoadEvents() {
+    ServerEvents.RoundStarted += EventHandlers.OnRoundStarting;
+    ServerEvents.RoundEnded += EventHandlers.OnRoundEnding;
+    MapEvents.AnnouncingDecontamination +=
+        EventHandlers.OnAnnouncingDecontamination;
+    MapEvents.Decontaminating += EventHandlers.OnDecontaminating;
+    ServerEvents.RespawningTeam += EventHandlers.OnRespawningTeam;
+    MapEvents.AnnouncingNtfEntrance += EventHandlers.OnAnnouncingNtfEntrance;
+    PlayerEvents.Died += EventHandlers.OnDied;
+    PlayerEvents.EnteringFemurBreaker += EventHandlers.OnEnteringFemurBreaker;
+    MapEvents.GeneratorActivated += EventHandlers.OnGeneratorActivated;
+    WarheadEvents.Starting += EventHandlers.OnWarheadStarting;
+    WarheadEvents.Stopping += EventHandlers.OnWarheadStopping;
+    PlayerEvents.Spawning += EventHandlers.OnSpawning;
+  }
 
-    public override void OnEnabled()
-    {
-        if (!Config.IsEnabled) return;
+  public override void OnEnabled() {
+    if (!Config.IsEnabled)
+      return;
 
-        base.OnEnabled();
+    base.OnEnabled();
 
-        EventHandlers = new EventHandlers(this);
-        LoadEvents();
-        Log.Info("브로드캐스트 플러그인 활성화");
-    }
+    EventHandlers = new EventHandlers(this);
+    LoadEvents();
+    Log.Info("브로드캐스트 플러그인 활성화");
+  }
 
-    public override void OnDisabled()
-    {
-        base.OnDisabled();
+  public override void OnDisabled() {
+    base.OnDisabled();
 
-        ServerEvents.RoundStarted -= EventHandlers.OnRoundStarting;
-        ServerEvents.RoundEnded -= EventHandlers.OnRoundEnding;
-        MapEvents.AnnouncingDecontamination -= EventHandlers.OnAnnouncingDecontamination;
-        MapEvents.Decontaminating -= EventHandlers.OnDecontaminating;
-        ServerEvents.RespawningTeam -= EventHandlers.OnRespawningTeam;
-        MapEvents.AnnouncingNtfEntrance -= EventHandlers.OnAnnouncingNtfEntrance;
-        PlayerEvents.Died -= EventHandlers.OnDied;
-        PlayerEvents.EnteringFemurBreaker -= EventHandlers.OnEnteringFemurBreaker;
-        MapEvents.GeneratorActivated -= EventHandlers.OnGeneratorActivated;
-        WarheadEvents.Starting -= EventHandlers.OnWarheadStarting;
-        WarheadEvents.Stopping -= EventHandlers.OnWarheadStopping;
-        PlayerEvents.Spawning -= EventHandlers.OnSpawning;
-        EventHandlers = null;
-    }
+    ServerEvents.RoundStarted -= EventHandlers.OnRoundStarting;
+    ServerEvents.RoundEnded -= EventHandlers.OnRoundEnding;
+    MapEvents.AnnouncingDecontamination -=
+        EventHandlers.OnAnnouncingDecontamination;
+    MapEvents.Decontaminating -= EventHandlers.OnDecontaminating;
+    ServerEvents.RespawningTeam -= EventHandlers.OnRespawningTeam;
+    MapEvents.AnnouncingNtfEntrance -= EventHandlers.OnAnnouncingNtfEntrance;
+    PlayerEvents.Died -= EventHandlers.OnDied;
+    PlayerEvents.EnteringFemurBreaker -= EventHandlers.OnEnteringFemurBreaker;
+    MapEvents.GeneratorActivated -= EventHandlers.OnGeneratorActivated;
+    WarheadEvents.Starting -= EventHandlers.OnWarheadStarting;
+    WarheadEvents.Stopping -= EventHandlers.OnWarheadStopping;
+    PlayerEvents.Spawning -= EventHandlers.OnSpawning;
+    EventHandlers = null;
+  }
 
-    public override void OnReloaded()
-    {
-
-    }
+  public override void OnReloaded() {}
 }
 }
