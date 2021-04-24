@@ -1,4 +1,5 @@
-﻿using Log = Exiled.API.Features.Log;
+﻿using Exiled.API.Enums;
+using Log = Exiled.API.Features.Log;
 using ServerEvents = Exiled.Events.Handlers.Server;
 using PlayerEvents = Exiled.Events.Handlers.Player;
 using MapEvents = Exiled.Events.Handlers.Map;
@@ -11,6 +12,15 @@ namespace BroadcastPlugin
     {
         public EventHandlers EventHandlers { get; private set; }
 
+        public override string Name { get; } = "BroadcastPlugin";
+
+        public override string Prefix { get; } =  "BroadcastPlugin";
+
+        // 이름 바꾸기 참기 레밸 500
+        public override string Author { get; } =  "ombe1229";
+
+        public override PluginPriority Priority { get; } = PluginPriority.Default;
+        
         public void LoadEvents()
         {
             ServerEvents.RoundStarted += EventHandlers.OnRoundStarting;

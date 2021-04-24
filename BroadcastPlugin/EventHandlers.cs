@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Exiled.API.Enums;
 using Exiled.API.Features;
 using Exiled.Events.EventArgs;
 using Respawning;
@@ -63,9 +64,9 @@ namespace BroadcastPlugin
         {
             if (ev.NextKnownTeam != SpawnableTeamType.ChaosInsurgency) return;
       
-            foreach (Player player in Player.List)
+            foreach (Player player in Player.List.Where(player => player.Side == Side.ChaosInsurgency))
             {
-                if (player.Team == Team.CDP || player.Team == Team.CHI) player.Broadcast(10,"<color=army_green>혼돈의 반란</color>이 시설 내에 진입했습니다.");
+                player.Broadcast(10,"<color=army_green>혼돈의 반란</color>이 시설 내에 진입했습니다.");
             }
         }
 
