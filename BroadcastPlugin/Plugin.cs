@@ -9,14 +9,12 @@ namespace BroadcastPlugin
 {
     public class BroadcastPlugin : Features.Plugin<Configs>
     {
-        public static bool IsStarted { get; set; }
         public EventHandlers EventHandlers { get; private set; }
 
         public void LoadEvents()
         {
             ServerEvents.RoundStarted += EventHandlers.OnRoundStarting;
             ServerEvents.RoundEnded += EventHandlers.OnRoundEnding;
-            ServerEvents.RestartingRound += EventHandlers.OnRoundRestarting;
             MapEvents.AnnouncingDecontamination += EventHandlers.OnAnnouncingDecontamination;
             MapEvents.Decontaminating += EventHandlers.OnDecontaminating;
             ServerEvents.RespawningTeam += EventHandlers.OnRespawningTeam;
@@ -32,6 +30,9 @@ namespace BroadcastPlugin
         public override void OnEnabled()
         {
             if (!Config.IsEnabled) return;
+           
+            base.OnEnabled();
+            
             EventHandlers = new EventHandlers(this);
             LoadEvents();
             Log.Info("브로드캐스트 플러그인 활성화");
@@ -39,9 +40,10 @@ namespace BroadcastPlugin
         
         public override void OnDisabled()
         {
+            base.OnDisabled();
+            
             ServerEvents.RoundStarted -= EventHandlers.OnRoundStarting;
             ServerEvents.RoundEnded -= EventHandlers.OnRoundEnding;
-            ServerEvents.RestartingRound -= EventHandlers.OnRoundRestarting;
             MapEvents.AnnouncingDecontamination -= EventHandlers.OnAnnouncingDecontamination;
             MapEvents.Decontaminating -= EventHandlers.OnDecontaminating;
             ServerEvents.RespawningTeam -= EventHandlers.OnRespawningTeam;
