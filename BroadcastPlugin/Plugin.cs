@@ -16,6 +16,7 @@ namespace BroadcastPlugin
 
         public override string Prefix { get; } =  "BroadcastPlugin";
 
+        // 이름 바꾸기 참기 레밸 500
         public override string Author { get; } =  "ombe1229";
 
         public override PluginPriority Priority { get; } = PluginPriority.Default;
