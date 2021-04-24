@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Exiled.API.Features;
 using Exiled.Events.EventArgs;
@@ -6,9 +7,9 @@ using Respawning;
 
 namespace BroadcastPlugin
 {
-    public class EventHandlers
+    public class EventHandlers : IDisposable
     {
-        private readonly BroadcastPlugin _pluginInstance;
+        private BroadcastPlugin _pluginInstance;
         public EventHandlers(BroadcastPlugin pluginInstance) => _pluginInstance = pluginInstance;
         internal void OnRoundStarting()
         {
@@ -96,7 +97,7 @@ namespace BroadcastPlugin
             if (Generator079.mainGenerator.forcedOvercharge)
                 return;
             
-            int cur = ++Generator079.mainGenerator.NetworktotalVoltage;
+            int cur = Generator079.mainGenerator.NetworktotalVoltage + 1;
             if (cur < 5)
             {
                 Map.Broadcast(10,$"발전기 <color=red>5</color>개중 <color=red>{cur}</color>개가 작동되었습니다.");
@@ -124,6 +125,11 @@ namespace BroadcastPlugin
             IEnumerable<Player> scpList = Player.Get(Team.SCP).ToList();
             
             ev.Player.Broadcast(10,$"이번 라운드의 <color=red>SCP</color>는 <color=red>{scpList.Count()}</color>마리입니다.\n{string.Join(" |", scpList.Select(player => player.Role))}");
+        }
+
+        public void Dispose()
+        {
+            _pluginInstance = null;
         }
     }
 }
