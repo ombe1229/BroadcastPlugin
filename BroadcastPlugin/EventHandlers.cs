@@ -1,4 +1,6 @@
-﻿using Exiled.API.Features;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Exiled.API.Features;
 using Exiled.Events.EventArgs;
 using Respawning;
 
@@ -7,27 +9,19 @@ namespace BroadcastPlugin
     public class EventHandlers
     {
         private readonly BroadcastPlugin _pluginInstance;
-        public EventHandlers(BroadcastPlugin pluginInstance) => this._pluginInstance = pluginInstance;
-
+        public EventHandlers(BroadcastPlugin pluginInstance) => _pluginInstance = pluginInstance;
         internal void OnRoundStarting()
         {
             if (!_pluginInstance.Config.IsEnabled) return;
             Map.Broadcast(10,"<color=green>라운드가 시작되었습니다.</color>");
             Log.Info("이 서버는 ombe1229의 브로드캐스트 플러그인을 사용 중입니다.");
-            BroadcastPlugin.IsStarted = true;
         }
 
         internal void OnRoundEnding(RoundEndedEventArgs ev)
         {
             Map.Broadcast(10,"<color=green>라운드가 종료되었습니다.</color>");
-            BroadcastPlugin.IsStarted = false;
         }
-
-        internal void OnRoundRestarting()
-        {
-            BroadcastPlugin.IsStarted = false;
-        }
-
+        
         internal void OnAnnouncingDecontamination(AnnouncingDecontaminationEventArgs ev)
         {
             switch (ev.Id)
@@ -68,6 +62,7 @@ namespace BroadcastPlugin
         internal void OnRespawningTeam(RespawningTeamEventArgs ev)
         {
             if (ev.NextKnownTeam != SpawnableTeamType.ChaosInsurgency) return;
+      
             foreach (Player player in Player.List)
             {
                 if (player.Team == Team.CDP || player.Team == Team.CHI) player.Broadcast(10,"<color=army_green>혼돈의 반란</color>이 시설 내에 진입했습니다.");
@@ -105,6 +100,9 @@ namespace BroadcastPlugin
 
         internal void OnGeneratorActivated(GeneratorActivatedEventArgs ev)
         {
+            if (Generator079.mainGenerator.forcedOvercharge)
+                return;
+            
             int cur = Generator079.mainGenerator.NetworktotalVoltage + 1;
             if (cur != 5)
             {
@@ -129,18 +127,10 @@ namespace BroadcastPlugin
         internal void OnSpawning(SpawningEventArgs ev)
         {
             if (ev.Player.Team != Team.SCP) return;
-            string scpList = "";
-            int count = 0;
-            foreach (Player player in Player.List)
-            {
-                if (player.Team == Team.SCP)
-                {
-                    if (count != 0) scpList += " | ";
-                    scpList += $"<color=red>{player.Role.ToString()}</color>";
-                    count++;
-                }
-            }
-            ev.Player.Broadcast(10,$"이번 라운드의 <color=red>SCP</color>는 <color=red>{count}</color>마리입니다.\n{scpList}");
+    
+            IEnumerable<Player> scpList = Player.Get(Team.SCP).ToList();
+            
+            ev.Player.Broadcast(10,$"이번 라운드의 <color=red>SCP</color>는 <color=red>{scpList.Count()}</color>마리입니다.\n{string.Join(" |", scpList.Select(player => player.Role))}");
         }
     }
 }
