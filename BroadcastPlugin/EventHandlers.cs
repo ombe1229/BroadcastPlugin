@@ -78,12 +78,19 @@ namespace BroadcastPlugin
         internal void OnDied(DiedEventArgs ev)
         {
             Team playerTeam = ev.Target.Team;
-
-            List<Player> enemyPlayers = Player.List.Where(p => p.IsEnemy(playerTeam) && p != ev.Target).ToList();
-
-            if (enemyPlayers.Count == 1)
+            int teamLeft = 0;
+            Player lastplayer = null;
+            foreach (Player player in Player.List)
             {
-                enemyPlayers.First().Broadcast(10, "당신이 현재 진영의 <color=red>마지막 생존자</color>입니다!");
+                if (!player.IsEnemy(playerTeam) && player != ev.Target)
+                {
+                    teamLeft++;
+                    lastplayer = player;
+                }
+            }
+            if (teamLeft == 1)
+            {
+                lastplayer?.Broadcast(10, "당신이 현재 진영의 <color=red>마지막 생존자</color>입니다!");
             }
         }
 
