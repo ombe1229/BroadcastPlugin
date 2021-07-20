@@ -28,9 +28,7 @@ Config 파일 세부화, 기능 추가 등은 디스코드 **ombe#3619**에게 �
 |                  기여자                   |
 | :---------------------------------------: |
 | [green1052](https://github.com/green1052) |
-| [MoonJM98](https://github.com/MoonJM98) |
-
-대충 만들고 어ㅓㅂ뎃 안하는거 개조당한다 ㅋㅋ
+|  [MoonJM98](https://github.com/MoonJM98)  |
 
 ### 라이센스
 
