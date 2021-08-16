@@ -13,14 +13,11 @@ namespace BroadcastPlugin
         public EventHandlers EventHandlers { get; private set; }
 
         public override string Name { get; } = "BroadcastPlugin";
-
-        public override string Prefix { get; } =  "BroadcastPlugin";
-
-        // 이름 바꾸기 참기 레밸 500
-        public override string Author { get; } =  "ombe1229";
+        public override string Prefix { get; } = "BroadcastPlugin";
+        public override string Author { get; } = "ombe1229";
 
         public override PluginPriority Priority { get; } = PluginPriority.Default;
-        
+
         public void LoadEvents()
         {
             ServerEvents.RoundStarted += EventHandlers.OnRoundStarting;
@@ -40,18 +37,18 @@ namespace BroadcastPlugin
         public override void OnEnabled()
         {
             if (!Config.IsEnabled) return;
-           
+
             base.OnEnabled();
-            
+
             EventHandlers = new EventHandlers(this);
             LoadEvents();
             Log.Info("브로드캐스트 플러그인 활성화");
         }
-        
+
         public override void OnDisabled()
         {
             base.OnDisabled();
-            
+
             ServerEvents.RoundStarted -= EventHandlers.OnRoundStarting;
             ServerEvents.RoundEnded -= EventHandlers.OnRoundEnding;
             MapEvents.AnnouncingDecontamination -= EventHandlers.OnAnnouncingDecontamination;
@@ -69,7 +66,7 @@ namespace BroadcastPlugin
 
         public override void OnReloaded()
         {
-            
+
         }
     }
 }
