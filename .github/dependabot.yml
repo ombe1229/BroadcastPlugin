@@ -4,3 +4,4 @@ updates:
     directory: "/BroadcastPlugin/"
     schedule:
       interval: "daily"
+      
